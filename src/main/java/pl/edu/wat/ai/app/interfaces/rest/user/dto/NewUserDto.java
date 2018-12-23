@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.rest.user.dto;
+package pl.edu.wat.ai.app.interfaces.rest.user.dto;
 
 import lombok.Builder;
 import lombok.Getter;

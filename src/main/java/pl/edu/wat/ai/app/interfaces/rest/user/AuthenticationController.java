@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.rest.user;
+package pl.edu.wat.ai.app.interfaces.rest.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -8,8 +8,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.wat.ai.app.config.JwtTokenUtil;
-import pl.edu.wat.ai.app.rest.user.dto.*;
+import pl.edu.wat.ai.app.config.jwt.JwtTokenUtil;
+import pl.edu.wat.ai.app.interfaces.rest.user.dto.*;
 import pl.edu.wat.ai.app.user.User;
 import pl.edu.wat.ai.app.user.UserRepository;
 

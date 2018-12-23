@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.rest.user;
+package pl.edu.wat.ai.app.interfaces.rest.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

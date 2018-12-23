@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.rest.currency;
+package pl.edu.wat.ai.app.interfaces.rest.currency;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

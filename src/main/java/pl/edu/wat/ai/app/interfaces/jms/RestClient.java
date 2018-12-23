@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.rest.currencyconverterapi;
+package pl.edu.wat.ai.app.interfaces.jms;
 
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
@@ -11,13 +11,15 @@ import java.nio.charset.Charset;
 
 @Slf4j
 class RestClient {
-    private static final String REST_SERVICE_URI = "http://free.currencyconverterapi.com/api/v5/convert?q=%s_%s&compact=y";
+    private static final String REST_SERVICE_URI = "https://api.exchangeratesapi.io/latest?symbols=%s,%s";
 
     static Currency fetchRate(Currency currency) {
         try {
             JSONObject json = readJsonFromUrl(String.format(REST_SERVICE_URI, currency.getFromCurrency(), currency.getToCurrency()));
             log.info(json.toString());
-            currency.updateRate((Double) json.getJSONObject(currency.getFromCurrency() + "_" + currency.getToCurrency()).get("val"));
+            Double from = (Double) json.getJSONObject("rates").get(currency.getFromCurrency());
+            Double to = (Double) json.getJSONObject("rates").get(currency.getToCurrency());
+            currency.updateRate(to/from);
         } catch (IOException | JSONException e) {
             log.error(e.getMessage());
         }

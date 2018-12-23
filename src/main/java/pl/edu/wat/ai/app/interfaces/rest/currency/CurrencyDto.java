@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.rest.currency;
+package pl.edu.wat.ai.app.interfaces.rest.currency;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.config;
+package pl.edu.wat.ai.app.config.jwt;
 
 import lombok.extern.slf4j.Slf4j;
 

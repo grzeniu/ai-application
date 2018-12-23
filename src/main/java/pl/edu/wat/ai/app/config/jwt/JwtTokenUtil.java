@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.config;
+package pl.edu.wat.ai.app.config.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
