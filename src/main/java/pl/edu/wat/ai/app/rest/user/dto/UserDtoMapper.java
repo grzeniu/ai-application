@@ -1,10 +1,10 @@
-package pl.edu.wat.ai.app.rest.dto;
+package pl.edu.wat.ai.app.rest.user.dto;
 
 import pl.edu.wat.ai.app.user.User;
 
 public class UserDtoMapper {
 
-    public  static UserDto mapUserToDto(User user){
+    public static UserDto mapUserToDto(User user) {
         return UserDto.builder()
                 .username(user.getUsername())
                 .firstName(user.getFirstName())

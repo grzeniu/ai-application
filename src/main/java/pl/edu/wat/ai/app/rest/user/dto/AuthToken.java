@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.rest.dto;
+package pl.edu.wat.ai.app.rest.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

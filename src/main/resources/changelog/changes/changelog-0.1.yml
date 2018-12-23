@@ -1,0 +1,10 @@
+databaseChangeLog:
+- changeSet:
+    id: insert currency
+    author: Grzesiek
+    changes:
+    - sqlFile:
+        tableName: curency
+        schemaName: dbo
+        path: v0001.sql
+        relativeToChangelogFile: true

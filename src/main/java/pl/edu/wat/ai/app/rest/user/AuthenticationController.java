@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.rest;
+package pl.edu.wat.ai.app.rest.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.wat.ai.app.config.JwtTokenUtil;
-import pl.edu.wat.ai.app.rest.dto.*;
+import pl.edu.wat.ai.app.rest.user.dto.*;
 import pl.edu.wat.ai.app.user.User;
 import pl.edu.wat.ai.app.user.UserRepository;
 
@@ -41,7 +41,7 @@ public class AuthenticationController {
         return new ResponseEntity<>(saveNewUser(user), HttpStatus.CREATED);
     }
 
-    private UserDto saveNewUser(NewUserDto dto){
+    private UserDto saveNewUser(NewUserDto dto) {
         return UserDtoMapper.mapUserToDto(userRepository.save(User.builder()
                 .username(dto.getUsername())
                 .firstName(dto.getFirstname())
