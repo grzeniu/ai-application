@@ -17,7 +17,7 @@ public class JmsProducer {
     String destinationQueue;
 
     void send(JmsMessage message){
-        log.info("send message "+message);
+        log.debug("send message "+message);
         jmsTemplate.convertAndSend(destinationQueue, message);
     }
 }

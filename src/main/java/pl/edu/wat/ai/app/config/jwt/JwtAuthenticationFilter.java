@@ -21,8 +21,8 @@ import java.util.Arrays;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    public static final String TOKEN_PREFIX = "Bearer ";
-    public static final String HEADER_STRING = "Authorization";
+    private static final String TOKEN_PREFIX = "Bearer ";
+    private static final String HEADER_STRING = "Authorization";
 
     @Qualifier("userService")
     @Autowired

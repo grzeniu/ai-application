@@ -16,8 +16,8 @@ import java.util.function.Function;
 @Component
 public class JwtTokenUtil implements Serializable {
 
-    public static final String SIGNING_KEY = "devglan123r";
-    public static final long ACCESS_TOKEN_VALIDITY_SECONDS = 5 * 60 * 60;
+    private static final String SIGNING_KEY = "devglan123r";
+    private static final long ACCESS_TOKEN_VALIDITY_SECONDS = 5 * 60 * 60;
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
