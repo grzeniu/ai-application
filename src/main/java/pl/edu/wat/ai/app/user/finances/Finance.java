@@ -3,6 +3,7 @@ package pl.edu.wat.ai.app.user.finances;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.edu.wat.ai.app.user.finances.category.Category;
 
 import javax.persistence.*;
 
@@ -18,4 +19,7 @@ public class Finance {
     private int id;
 
     private String description;
+
+    @OneToOne
+    private Category category;
 }

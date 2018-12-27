@@ -8,8 +8,8 @@ Back-end application part
     - docker command: `docker run -p 61616:61616 -p 8161:8161 -d -t webcenter/activemq`
 3. Run the application, application by default will be available on port 8081
 
-#Jms
+# Jms
 1. `http://localhost:8161/admin/queues.jsp` - here you can see more information about jms queue, for example how many messages are enqueued
 
-#Swagger
+# Swagger
 1. Swagger documentation will be available on endpoint `*/swagger-ui.html`
