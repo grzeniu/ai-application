@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.interfaces.rest.user.finances;
+package pl.edu.wat.ai.app.interfaces.rest.user.finances.category;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

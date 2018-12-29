@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class FinanceDto {
+class FinanceDto {
     private final String description;
+    private final Long value;
 }

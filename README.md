@@ -1,4 +1,4 @@
-# ai-application
+# Ai-application
 Back-end application part
 
 # How to run application

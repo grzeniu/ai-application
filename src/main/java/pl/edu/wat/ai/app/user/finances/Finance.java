@@ -20,6 +20,8 @@ public class Finance {
 
     private String description;
 
+    private Long value;
+
     @OneToOne
     private Category category;
 }
