@@ -8,4 +8,5 @@ import lombok.Data;
 class FinanceDto {
     private final String description;
     private final Long value;
+    private final Integer categoryId;
 }

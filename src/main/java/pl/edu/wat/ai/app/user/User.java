@@ -5,17 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 import pl.edu.wat.ai.app.user.finances.Finance;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Getter
 @Entity
-@Table(name = "my_user")
+@Builder
+@Audited
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Builder
+@Table(name = "my_user")
 public class User {
 
     @Id
@@ -28,6 +30,7 @@ public class User {
     private String password;
     private String mail;
 
+    @Audited
     @OneToMany(cascade = CascadeType.ALL)
     private List<Finance> finances;
 }

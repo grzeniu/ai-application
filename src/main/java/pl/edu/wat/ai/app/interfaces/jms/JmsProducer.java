@@ -16,8 +16,8 @@ public class JmsProducer {
     @Value("${jms.queue.destination}")
     String destinationQueue;
 
-    void send(JmsMessage message){
-        log.debug("send message "+message);
+    void send(JmsMessage message) {
+        log.debug("send message " + message);
         jmsTemplate.convertAndSend(destinationQueue, message);
     }
 }

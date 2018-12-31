@@ -19,7 +19,7 @@ class RestClient {
             log.info(json.toString());
             Double from = (Double) json.getJSONObject("rates").get(currency.getFromCurrency());
             Double to = (Double) json.getJSONObject("rates").get(currency.getToCurrency());
-            currency.updateRate(to/from);
+            currency.updateRate(to / from);
         } catch (IOException | JSONException e) {
             log.error(e.getMessage());
         }
