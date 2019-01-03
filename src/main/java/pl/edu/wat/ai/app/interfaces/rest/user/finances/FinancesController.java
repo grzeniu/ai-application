@@ -23,15 +23,15 @@ public class FinancesController {
 
     @PostMapping("/expenses")
     private ResponseEntity<String> addExpense(@RequestHeader("Authorization") String token,
-                                              @RequestBody FinanceDto financeDto) {
-        financeService.addExpense(token, financeDto.getDescription(), financeDto.getValue(),financeDto.getCategoryId());
+                                              @RequestBody List<FinanceDto> financeDto) {
+        financeService.addExpense(token, financeDto);
         return new ResponseEntity<>("Done", HttpStatus.CREATED);
     }
 
     @PostMapping("/incomes")
     private ResponseEntity<String> addIncome(@RequestHeader("Authorization") String token,
-                                             @RequestBody FinanceDto financeDto) {
-        financeService.addIncome(token, financeDto.getDescription(), financeDto.getValue(), financeDto.getCategoryId());
+                                             @RequestBody List<FinanceDto> financeDto) {
+        financeService.addIncome(token, financeDto);
         return new ResponseEntity<>("Done", HttpStatus.CREATED);
     }
 

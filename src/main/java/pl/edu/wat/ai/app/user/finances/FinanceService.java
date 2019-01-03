@@ -3,6 +3,7 @@ package pl.edu.wat.ai.app.user.finances;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.edu.wat.ai.app.config.jwt.JwtTokenUtil;
+import pl.edu.wat.ai.app.interfaces.rest.user.finances.FinanceDto;
 import pl.edu.wat.ai.app.user.User;
 import pl.edu.wat.ai.app.user.UserRepository;
 
@@ -22,21 +23,19 @@ public class FinanceService {
         return findUserByToken(token).getFinances();
     }
 
-    public void addExpense(String token, String description, Long value, Integer categoryId) {
+    public void addExpense(String token, List<FinanceDto> finances) {
         User user = findUserByToken(token);
-        Expense expense = new Expense();
-        expense.changeMandatoryAttributes(financeFactory.create(description, value, categoryId));
+        List<Expense> expenses = finances.stream().map(this::createExpanse).collect(Collectors.toList());
 
-        user.getFinances().add(expense);
+        user.getFinances().addAll(expenses);
         userRepository.save(user);
     }
 
-    public void addIncome(String token, String description, Long value, Integer categoryId) {
+    public void addIncome(String token, List<FinanceDto> finances) {
         User user = findUserByToken(token);
-        Income income = new Income();
-        income.changeMandatoryAttributes(financeFactory.create(description, value, categoryId));
+        List<Income> incomes = finances.stream().map(this::createIncome).collect(Collectors.toList());
 
-        user.getFinances().add(income);
+        user.getFinances().addAll(incomes);
         userRepository.save(user);
     }
 
@@ -47,9 +46,20 @@ public class FinanceService {
         userRepository.save(user);
     }
 
-
     private User findUserByToken(String token) {
         String usernameFromToken = jwtTokenUtil.getUsernameFromToken(token.substring(7));
         return userRepository.findByUsername(usernameFromToken).orElseThrow(EntityNotFoundException::new);
+    }
+
+    private Expense createExpanse(FinanceDto finance){
+        Expense expense = new Expense();
+        expense.changeMandatoryAttributes(financeFactory.create(finance.getDescription(), finance.getValue(), finance.getCategoryId()));
+        return expense;
+    }
+
+    private Income createIncome(FinanceDto finance){
+        Income income = new Income();
+        income.changeMandatoryAttributes(financeFactory.create(finance.getDescription(), finance.getValue(), finance.getCategoryId()));
+        return income;
     }
 }
