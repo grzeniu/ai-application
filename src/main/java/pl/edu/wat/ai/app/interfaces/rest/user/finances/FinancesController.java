@@ -10,15 +10,21 @@ import pl.edu.wat.ai.app.user.finances.FinanceService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/finances")
 @RequiredArgsConstructor
+@RequestMapping("/finances")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class FinancesController {
 
     private final FinanceService financeService;
 
-    @GetMapping()
-    private ResponseEntity<List<Finance>> getAll(@RequestHeader("Authorization") String token) {
-        return new ResponseEntity<>(financeService.getFinanceByUser(token), HttpStatus.OK);
+    @GetMapping("/incomes")
+    private ResponseEntity<List<Finance>> getAllIncomes(@RequestHeader("Authorization") String token) {
+        return new ResponseEntity<>(financeService.getIncomesByUser(token), HttpStatus.OK);
+    }
+
+    @GetMapping("/expenses")
+    private ResponseEntity<List<Finance>> getAllExpenses(@RequestHeader("Authorization") String token) {
+        return new ResponseEntity<>(financeService.getExpensesByUser(token), HttpStatus.OK);
     }
 
     @PostMapping("/expenses")

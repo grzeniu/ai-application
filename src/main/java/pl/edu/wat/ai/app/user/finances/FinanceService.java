@@ -19,6 +19,14 @@ public class FinanceService {
     private final FinanceFactory financeFactory;
     private final JwtTokenUtil jwtTokenUtil;
 
+    public List<Finance> getIncomesByUser(String token){
+        return getFinanceByUser(token).stream().filter(it -> it.getFinanceType().equals("INCOME")).collect(Collectors.toList());
+    }
+
+    public List<Finance> getExpensesByUser(String token){
+        return getFinanceByUser(token).stream().filter(it -> it.getFinanceType().equals("EXPENSE")).collect(Collectors.toList());
+    }
+
     public List<Finance> getFinanceByUser(String token) {
         return findUserByToken(token).getFinances();
     }

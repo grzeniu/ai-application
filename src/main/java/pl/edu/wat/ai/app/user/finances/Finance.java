@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "financeType", discriminatorType = DiscriminatorType.STRING)
 public class Finance {
 
     @Id
@@ -29,6 +30,9 @@ public class Finance {
     private String description;
 
     private Long value;
+
+    @Column(name = "financeType", insertable = false, updatable = false)
+    private String financeType;
 
     @CreatedBy
     private String createdBy;

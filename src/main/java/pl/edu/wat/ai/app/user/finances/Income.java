@@ -14,5 +14,5 @@ import javax.persistence.InheritanceType;
 @Data
 @Audited
 @DiscriminatorValue("INCOME")
-class Income extends Finance {
+public class Income extends Finance {
 }
