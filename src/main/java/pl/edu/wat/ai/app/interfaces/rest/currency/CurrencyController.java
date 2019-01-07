@@ -3,10 +3,7 @@ package pl.edu.wat.ai.app.interfaces.rest.currency;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.wat.ai.app.currency.Currency;
 import pl.edu.wat.ai.app.currency.CurrencyRepository;
 
@@ -17,6 +14,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/currencies")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class CurrencyController {
 
     private final CurrencyRepository currencyRepository;
