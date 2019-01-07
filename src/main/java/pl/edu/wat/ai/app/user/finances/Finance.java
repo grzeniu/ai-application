@@ -29,7 +29,7 @@ public class Finance {
 
     private String description;
 
-    private Long value;
+    private String value;
 
     @Column(name = "financeType", insertable = false, updatable = false)
     private String financeType;

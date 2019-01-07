@@ -15,7 +15,7 @@ class FinanceFactory {
 
     private final CategoryRepository categoryRepository;
 
-    ValidFinance create(String description, Long value, Integer categoryId){
+    ValidFinance create(String description, String value, Integer categoryId){
         return new ValidFinance(description,value,findCategory(categoryId));
     }
 
@@ -27,7 +27,7 @@ class FinanceFactory {
     @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
     static final class ValidFinance {
         private final String description;
-        private final Long value;
+        private final String value;
         private final Category category;
     }
 }

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.wat.ai.app.user.User;
 import pl.edu.wat.ai.app.user.finances.Finance;
 import pl.edu.wat.ai.app.user.finances.FinanceService;
 
@@ -30,15 +31,27 @@ public class FinancesController {
     @PostMapping("/expenses")
     private ResponseEntity<String> addExpense(@RequestHeader("Authorization") String token,
                                               @RequestBody List<FinanceDto> financeDto) {
-        financeService.addExpense(token, financeDto);
+        financeService.addExpenses(token, financeDto);
         return new ResponseEntity<>("Done", HttpStatus.CREATED);
     }
 
     @PostMapping("/incomes")
     private ResponseEntity<String> addIncome(@RequestHeader("Authorization") String token,
                                              @RequestBody List<FinanceDto> financeDto) {
-        financeService.addIncome(token, financeDto);
+        financeService.addIncomes(token, financeDto);
         return new ResponseEntity<>("Done", HttpStatus.CREATED);
+    }
+
+    @PostMapping("/expense")
+    private ResponseEntity<Finance> addExpense(@RequestHeader("Authorization") String token,
+                                            @RequestBody FinanceDto financeDto) {
+        return new ResponseEntity<>(financeService.addExpense(token, financeDto), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/income")
+    private ResponseEntity<Finance> addIncome(@RequestHeader("Authorization") String token,
+                                           @RequestBody FinanceDto financeDto) {
+        return new ResponseEntity<>(financeService.addIncome(token, financeDto), HttpStatus.CREATED);
     }
 
     @DeleteMapping("{id}")

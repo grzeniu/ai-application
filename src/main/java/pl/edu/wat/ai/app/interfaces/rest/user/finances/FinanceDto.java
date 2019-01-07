@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class FinanceDto {
     private final String description;
-    private final Long value;
+    private final String value;
     private final Integer categoryId;
 }

@@ -2,6 +2,7 @@ package pl.edu.wat.ai.app.user.finances;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.edu.wat.ai.app.config.jwt.JwtTokenUtil;
 import pl.edu.wat.ai.app.interfaces.rest.user.finances.FinanceDto;
 import pl.edu.wat.ai.app.user.User;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
 public class FinanceService {
 
     private final UserRepository userRepository;
+    private final ExpenseRepository expenseRepository;
+    private final IncomeRepository incomeRepository;
     private final FinanceFactory financeFactory;
     private final JwtTokenUtil jwtTokenUtil;
 
@@ -31,20 +34,42 @@ public class FinanceService {
         return findUserByToken(token).getFinances();
     }
 
-    public void addExpense(String token, List<FinanceDto> finances) {
+    public User addExpenses(String token, List<FinanceDto> finances) {
         User user = findUserByToken(token);
         List<Expense> expenses = finances.stream().map(this::createExpanse).collect(Collectors.toList());
 
         user.getFinances().addAll(expenses);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
-    public void addIncome(String token, List<FinanceDto> finances) {
+    public User addIncomes(String token, List<FinanceDto> finances) {
         User user = findUserByToken(token);
         List<Income> incomes = finances.stream().map(this::createIncome).collect(Collectors.toList());
 
         user.getFinances().addAll(incomes);
+        return userRepository.save(user);
+    }
+
+    @Transactional
+    public Expense addExpense(String token, FinanceDto finance) {
+        User user = findUserByToken(token);
+        Expense expense = createExpanse(finance);
+
+        Expense savedExpense = expenseRepository.save(expense);
+        user.getFinances().add(expense);
         userRepository.save(user);
+        return savedExpense;
+    }
+
+    @Transactional
+    public Income addIncome(String token, FinanceDto finance) {
+        User user = findUserByToken(token);
+        Income income = createIncome(finance);
+
+        Income savedIncome = incomeRepository.save(income);
+        user.getFinances().add(income);
+        userRepository.save(user);
+        return savedIncome;
     }
 
     public void deleteFinance(String token, Integer id) {
