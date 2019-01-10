@@ -27,7 +27,7 @@ public class FinanceService {
     }
 
     public List<Finance> getExpensesByUser(String token){
-        return getFinanceByUser(token).stream().filter(it -> it.getFinanceType().equals("EXPENSE")).collect(Collectors.toList());
+        return getFinanceByUser(token).stream().filter(it -> it.getFinanceType().equals("EXPENSES")).collect(Collectors.toList());
     }
 
     public List<Finance> getFinanceByUser(String token) {
