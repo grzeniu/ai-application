@@ -26,4 +26,14 @@ public class UserController {
     public ResponseEntity<User> getOne(@PathVariable int id) {
         return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
     }
+
+    @GetMapping("/limit")
+    public ResponseEntity<String> getUserLimit(@RequestHeader("Authorization") String token) {
+        return new ResponseEntity<>(userService.findByToken(token).getUserMonthlyLimit(), HttpStatus.OK);
+    }
+
+    @PatchMapping
+    public ResponseEntity<User> updateUserLimit(@RequestHeader("Authorization") String token, @RequestParam String limit) {
+        return new ResponseEntity<>(userService.updateUserLimit(token, limit), HttpStatus.NO_CONTENT);
+    }
 }

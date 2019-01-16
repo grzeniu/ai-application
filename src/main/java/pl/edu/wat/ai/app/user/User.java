@@ -29,8 +29,13 @@ public class User {
     @JsonIgnore
     private String password;
     private String mail;
+    private String userMonthlyLimit;
 
     @Audited
     @OneToMany(cascade = CascadeType.ALL)
     private List<Finance> finances;
+
+    void updateLimit(String newLimit){
+        this.userMonthlyLimit =newLimit;
+    }
 }

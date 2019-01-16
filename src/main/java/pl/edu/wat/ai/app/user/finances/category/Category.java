@@ -19,5 +19,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String name;
+    private String polishName;
+
+    private String englishName;
 }

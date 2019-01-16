@@ -11,4 +11,5 @@ public class UserDto {
     private final String lastName;
     private final String username;
     private final String mail;
+    private final String limit;
 }

@@ -10,6 +10,7 @@ public class UserDtoMapper {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .mail(user.getMail())
+                .limit(user.getUserMonthlyLimit())
                 .build();
     }
 }

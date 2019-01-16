@@ -7,7 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import pl.edu.wat.ai.app.config.jwt.JwtTokenUtil;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.List;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final JwtTokenUtil jwtTokenUtil;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
@@ -36,5 +40,16 @@ public class UserService implements UserDetailsService {
 
     public User findById(int id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    public User findByToken(String token) {
+        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(token.substring(7));
+        return userRepository.findByUsername(usernameFromToken).orElseThrow(EntityNotFoundException::new);
+    }
+    @Transactional
+    public User updateUserLimit(String token, String newLimit){
+        User user = findByToken(token);
+        user.updateLimit(newLimit);
+        return user;
     }
 }

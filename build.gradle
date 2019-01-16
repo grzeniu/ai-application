@@ -40,4 +40,5 @@ dependencies {
 	implementation('org.hibernate:hibernate-envers:5.4.0.Final')
 	runtimeOnly('org.postgresql:postgresql')
 	compileOnly('org.projectlombok:lombok')
+	compile 'org.apache.commons:commons-csv:1.5'
 }

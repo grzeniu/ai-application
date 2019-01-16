@@ -48,6 +48,7 @@ public class AuthenticationController {
                 .lastName(dto.getLastname())
                 .password(bcryptEncoder.encode(dto.getPassword()))
                 .mail(dto.getMail())
+                .userMonthlyLimit(dto.getLimit())
                 .build()));
     }
 

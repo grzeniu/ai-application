@@ -34,6 +34,14 @@ public class FinanceService {
         return findUserByToken(token).getFinances();
     }
 
+    public List<Finance> getFinanceByUserByDate(String token,Integer month, Integer year) {
+        return findUserByToken(token)
+                .getFinances()
+                .stream()
+                .filter(it -> it.getCreatedDate().getMonthValue() == month && it.getCreatedDate().getYear() == year)
+                .collect(Collectors.toList());
+    }
+
     public User addExpenses(String token, List<FinanceDto> finances) {
         User user = findUserByToken(token);
         List<Expense> expenses = finances.stream().map(this::createExpanse).collect(Collectors.toList());
@@ -58,7 +66,7 @@ public class FinanceService {
         Expense savedExpense = expenseRepository.save(expense);
         user.getFinances().add(expense);
         userRepository.save(user);
-        return savedExpense;
+        return expenseRepository.findById(savedExpense.getId()).orElseThrow(EntityNotFoundException::new);
     }
 
     @Transactional
@@ -69,7 +77,7 @@ public class FinanceService {
         Income savedIncome = incomeRepository.save(income);
         user.getFinances().add(income);
         userRepository.save(user);
-        return savedIncome;
+        return incomeRepository.findById(savedIncome.getId()).orElseThrow(EntityNotFoundException::new);
     }
 
     public void deleteFinance(String token, Integer id) {

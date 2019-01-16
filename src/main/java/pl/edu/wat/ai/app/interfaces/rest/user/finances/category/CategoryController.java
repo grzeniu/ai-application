@@ -11,6 +11,7 @@ import pl.edu.wat.ai.app.user.finances.category.Category;
 import pl.edu.wat.ai.app.user.finances.category.CategoryRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,8 +21,27 @@ public class CategoryController {
 
     private final CategoryRepository categoryRepository;
 
-    @GetMapping()
-    private ResponseEntity<List<Category>> getCategories() {
-        return new ResponseEntity<>(categoryRepository.findAll(), HttpStatus.OK);
+    @GetMapping("/pl")
+    private ResponseEntity<List<CategoryDto>> getCategoriesWithPolishNames() {
+        return new ResponseEntity<>(categoryRepository.findAll().stream().map(this::mapToDtoUsingPolishNames).collect(Collectors.toList()), HttpStatus.OK);
+    }
+
+    @GetMapping("/eng")
+    private ResponseEntity<List<CategoryDto>> getCategoriesWithEnglishNames() {
+        return new ResponseEntity<>(categoryRepository.findAll().stream().map(this::mapToDtoUsingEnglishNames).collect(Collectors.toList()), HttpStatus.OK);
+    }
+
+    private CategoryDto mapToDtoUsingPolishNames(Category category){
+        return CategoryDto.builder()
+                .id(category.getId())
+                .name(category.getPolishName())
+                .build();
+    }
+
+    private CategoryDto mapToDtoUsingEnglishNames(Category category){
+        return CategoryDto.builder()
+                .id(category.getId())
+                .name(category.getEnglishName())
+                .build();
     }
 }

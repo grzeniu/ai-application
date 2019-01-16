@@ -23,4 +23,7 @@ public class NewUserDto {
 
     @NotNull
     private final String mail;
+
+    @NotNull
+    private final String limit;
 }
