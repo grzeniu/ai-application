@@ -1,0 +1,15 @@
+version: "3"
+services:
+
+  jms:
+    image: webcenter/activemq:latest
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+
+  postgres:
+    image: postgres:9.3
+    ports:
+      - "5434:5432"
+    environment:
+      - "POSTGRES_PASSWORD=docker"
