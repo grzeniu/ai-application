@@ -4,17 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import pl.edu.wat.ai.app.currency.Currency;
-import pl.edu.wat.ai.app.currency.CurrencyRepository;
+import pl.edu.wat.ai.app.currency.CurrencyProcessing;
 
 @Component
 @RequiredArgsConstructor
 class CurrencyScheduler {
-    private final CurrencyRepository currencyRepository;
+    private final CurrencyProcessing currencyProcessing;
     private final JmsProducer jmsProducer;
 
     @Scheduled(fixedDelay = 120000)
     void getCurrencyBySymbol() {
-        currencyRepository.findAll().stream().map(this::mapToJmsMessage).forEach(jmsProducer::send);
+        currencyProcessing.getCurrencies().stream().map(this::mapToJmsMessage).forEach(jmsProducer::send);
     }
 
     private JmsMessage mapToJmsMessage(Currency currency) {
