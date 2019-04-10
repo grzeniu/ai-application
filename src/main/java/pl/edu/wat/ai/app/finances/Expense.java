@@ -12,5 +12,5 @@ import javax.persistence.Entity;
 @Data
 @Audited
 @DiscriminatorValue("EXPENSES")
-class Expense extends Finance {
+public class Expense extends Finance {
 }

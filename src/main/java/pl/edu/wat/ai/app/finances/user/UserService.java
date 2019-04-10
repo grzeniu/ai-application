@@ -46,8 +46,9 @@ public class UserService implements UserDetailsService {
         String usernameFromToken = jwtTokenUtil.getUsernameFromToken(token.substring(7));
         return userRepository.findByUsername(usernameFromToken).orElseThrow(EntityNotFoundException::new);
     }
+
     @Transactional
-    public User updateUserLimit(String token, String newLimit){
+    public User updateUserLimit(String token, String newLimit) {
         User user = findByToken(token);
         user.updateLimit(newLimit);
         return user;

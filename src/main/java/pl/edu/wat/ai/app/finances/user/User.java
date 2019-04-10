@@ -8,7 +8,13 @@ import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 import pl.edu.wat.ai.app.finances.Finance;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Getter
@@ -35,7 +41,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Finance> finances;
 
-    void updateLimit(String newLimit){
-        this.userMonthlyLimit =newLimit;
+    void updateLimit(String newLimit) {
+        this.userMonthlyLimit = newLimit;
     }
 }

@@ -15,11 +15,11 @@ class FinanceFactory {
 
     private final CategoryRepository categoryRepository;
 
-    ValidFinance create(String description, String value, Integer categoryId){
-        return new ValidFinance(description,value,findCategory(categoryId));
+    ValidFinance create(String description, String value, Integer categoryId) {
+        return new ValidFinance(description, value, findCategory(categoryId));
     }
 
-    private Category findCategory(Integer id){
+    private Category findCategory(Integer id) {
         return categoryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 

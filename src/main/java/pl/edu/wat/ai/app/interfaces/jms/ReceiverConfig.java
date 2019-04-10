@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import pl.edu.wat.ai.app.currency.CurrencyProcessing;
-import pl.edu.wat.ai.app.currency.CurrencyRepository;
-import pl.edu.wat.ai.app.interfaces.jms.JmsConsumer;
 
 import java.util.Arrays;
 

@@ -31,14 +31,14 @@ public class CategoryController {
         return new ResponseEntity<>(categoryRepository.findAll().stream().map(this::mapToDtoUsingEnglishNames).collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    private CategoryDto mapToDtoUsingPolishNames(Category category){
+    private CategoryDto mapToDtoUsingPolishNames(Category category) {
         return CategoryDto.builder()
                 .id(category.getId())
                 .name(category.getPolishName())
                 .build();
     }
 
-    private CategoryDto mapToDtoUsingEnglishNames(Category category){
+    private CategoryDto mapToDtoUsingEnglishNames(Category category) {
         return CategoryDto.builder()
                 .id(category.getId())
                 .name(category.getEnglishName())

@@ -10,7 +10,17 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import pl.edu.wat.ai.app.finances.category.Category;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 
 @Data
@@ -44,7 +54,7 @@ public class Finance {
     @OneToOne
     private Category category;
 
-    void changeMandatoryAttributes(FinanceFactory.ValidFinance validFinance){
+    void changeMandatoryAttributes(FinanceFactory.ValidFinance validFinance) {
         this.setDescription(validFinance.getDescription());
         this.setValue(validFinance.getValue());
         this.setCategory(validFinance.getCategory());

@@ -3,10 +3,10 @@ package pl.edu.wat.ai.app.finances;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.edu.wat.ai.app.interfaces.rest.jwt.JwtTokenUtil;
-import pl.edu.wat.ai.app.interfaces.rest.user.finances.FinanceDto;
 import pl.edu.wat.ai.app.finances.user.User;
 import pl.edu.wat.ai.app.finances.user.UserRepository;
+import pl.edu.wat.ai.app.interfaces.rest.jwt.JwtTokenUtil;
+import pl.edu.wat.ai.app.interfaces.rest.user.finances.FinanceDto;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -22,11 +22,11 @@ public class FinanceService {
     private final FinanceFactory financeFactory;
     private final JwtTokenUtil jwtTokenUtil;
 
-    public List<Finance> getIncomesByUser(String token){
+    public List<Finance> getIncomesByUser(String token) {
         return getFinanceByUser(token).stream().filter(it -> it.getFinanceType().equals("INCOME")).collect(Collectors.toList());
     }
 
-    public List<Finance> getExpensesByUser(String token){
+    public List<Finance> getExpensesByUser(String token) {
         return getFinanceByUser(token).stream().filter(it -> it.getFinanceType().equals("EXPENSES")).collect(Collectors.toList());
     }
 
@@ -34,7 +34,7 @@ public class FinanceService {
         return findUserByToken(token).getFinances();
     }
 
-    public List<Finance> getFinanceByUserByDate(String token,Integer month, Integer year) {
+    public List<Finance> getFinanceByUserByDate(String token, Integer month, Integer year) {
         return findUserByToken(token)
                 .getFinances()
                 .stream()
@@ -92,13 +92,13 @@ public class FinanceService {
         return userRepository.findByUsername(usernameFromToken).orElseThrow(EntityNotFoundException::new);
     }
 
-    private Expense createExpanse(FinanceDto finance){
+    private Expense createExpanse(FinanceDto finance) {
         Expense expense = new Expense();
         expense.changeMandatoryAttributes(financeFactory.create(finance.getDescription(), finance.getValue(), finance.getCategoryId()));
         return expense;
     }
 
-    private Income createIncome(FinanceDto finance){
+    private Income createIncome(FinanceDto finance) {
         Income income = new Income();
         income.changeMandatoryAttributes(financeFactory.create(finance.getDescription(), finance.getValue(), finance.getCategoryId()));
         return income;

@@ -17,7 +17,7 @@ class WriteDataToCSV {
     static void writeObjectToPLCSV(PrintWriter writer, List<Finance> finances) {
         try (
                 CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
-                        .withHeader("Opis", "Wartosc","Typ","Wlasciciel","Data dodania","Kategoria"));
+                        .withHeader("Opis", "Wartosc", "Typ", "Wlasciciel", "Data dodania", "Kategoria"));
         ) {
             for (Finance finance : finances) {
                 List<String> data = Arrays.asList(
@@ -40,7 +40,7 @@ class WriteDataToCSV {
     static void writeObjectToENGCSV(PrintWriter writer, List<Finance> finances) {
         try (
                 CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
-                        .withHeader("Description", "Value","Type","Owner","Created date","Category"));
+                        .withHeader("Description", "Value", "Type", "Owner", "Created date", "Category"));
         ) {
             for (Finance finance : finances) {
                 List<String> data = Arrays.asList(
@@ -60,8 +60,8 @@ class WriteDataToCSV {
         }
     }
 
-    private static String getPolishName(String financeType){
-        if(financeType.equals("INCOME"))
+    private static String getPolishName(String financeType) {
+        if (financeType.equals("INCOME"))
             return "PRZYCHOD";
         else
             return "WYDATEK";
