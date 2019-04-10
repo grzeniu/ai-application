@@ -1,13 +1,11 @@
-package pl.edu.wat.ai.app.interfaces.rest;
+package pl.edu.wat.ai.app.interfaces.rest.audit;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
-import pl.edu.wat.ai.app.user.finances.Finance;
+import pl.edu.wat.ai.app.finances.Finance;
 
-import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;

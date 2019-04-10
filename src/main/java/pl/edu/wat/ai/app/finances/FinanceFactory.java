@@ -1,11 +1,11 @@
-package pl.edu.wat.ai.app.user.finances;
+package pl.edu.wat.ai.app.finances;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.edu.wat.ai.app.user.finances.category.Category;
-import pl.edu.wat.ai.app.user.finances.category.CategoryRepository;
+import pl.edu.wat.ai.app.finances.category.Category;
+import pl.edu.wat.ai.app.finances.category.CategoryRepository;
 
 import javax.persistence.EntityNotFoundException;
 

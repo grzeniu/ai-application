@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.wat.ai.app.user.finances.category.Category;
-import pl.edu.wat.ai.app.user.finances.category.CategoryRepository;
+import pl.edu.wat.ai.app.finances.category.Category;
+import pl.edu.wat.ai.app.finances.category.CategoryRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

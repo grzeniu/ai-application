@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.config.jwt;
+package pl.edu.wat.ai.app.interfaces.rest.jwt;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

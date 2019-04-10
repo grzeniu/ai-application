@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.config.jms;
+package pl.edu.wat.ai.app.interfaces.jms;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableJms
-public class ReceiverConfig {
+class ReceiverConfig {
 
     @Value("${activemq.broker-url}")
     private String brokerUrl;

@@ -31,7 +31,6 @@ public class CurrencyProcessing {
         return currencyRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    //TODO expose interface
     public void updateCurrencyRate(Currency currency) {
         Assert.notNull(currency, "updateCurrencyRate - currency cannot be null");
 

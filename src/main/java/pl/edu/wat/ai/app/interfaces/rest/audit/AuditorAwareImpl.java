@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app;
+package pl.edu.wat.ai.app.interfaces.rest.audit;
 
 
 import org.springframework.data.domain.AuditorAware;

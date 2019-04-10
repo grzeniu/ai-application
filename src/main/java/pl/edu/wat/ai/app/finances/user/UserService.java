@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.user;
+package pl.edu.wat.ai.app.finances.user;
 
 
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.edu.wat.ai.app.config.jwt.JwtTokenUtil;
+import pl.edu.wat.ai.app.interfaces.rest.jwt.JwtTokenUtil;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;

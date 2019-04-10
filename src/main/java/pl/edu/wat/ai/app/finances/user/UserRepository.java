@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.user;
+package pl.edu.wat.ai.app.finances.user;
 
 import org.springframework.data.repository.CrudRepository;
 

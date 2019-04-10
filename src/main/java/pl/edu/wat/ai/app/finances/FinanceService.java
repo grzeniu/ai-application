@@ -1,12 +1,12 @@
-package pl.edu.wat.ai.app.user.finances;
+package pl.edu.wat.ai.app.finances;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.edu.wat.ai.app.config.jwt.JwtTokenUtil;
+import pl.edu.wat.ai.app.interfaces.rest.jwt.JwtTokenUtil;
 import pl.edu.wat.ai.app.interfaces.rest.user.finances.FinanceDto;
-import pl.edu.wat.ai.app.user.User;
-import pl.edu.wat.ai.app.user.UserRepository;
+import pl.edu.wat.ai.app.finances.user.User;
+import pl.edu.wat.ai.app.finances.user.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;

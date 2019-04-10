@@ -1,6 +1,6 @@
 package pl.edu.wat.ai.app.interfaces.rest.user.dto;
 
-import pl.edu.wat.ai.app.user.User;
+import pl.edu.wat.ai.app.finances.user.User;
 
 public class UserDtoMapper {
 

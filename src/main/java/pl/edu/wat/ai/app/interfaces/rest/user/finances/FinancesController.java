@@ -4,9 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.wat.ai.app.user.User;
-import pl.edu.wat.ai.app.user.finances.Finance;
-import pl.edu.wat.ai.app.user.finances.FinanceService;
+import pl.edu.wat.ai.app.finances.Finance;
+import pl.edu.wat.ai.app.finances.FinanceService;
 
 import java.util.List;
 

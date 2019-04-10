@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.config.jwt;
+package pl.edu.wat.ai.app.interfaces.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pl.edu.wat.ai.app.interfaces.rest.jwt.JwtAuthenticationEntryPoint;
+import pl.edu.wat.ai.app.interfaces.rest.jwt.JwtAuthenticationFilter;
 
 import javax.annotation.Resource;
 
@@ -21,7 +23,7 @@ import javax.annotation.Resource;
 @EnableWebSecurity
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] AUTH_WHITELIST = {
             "/v2/api-docs",

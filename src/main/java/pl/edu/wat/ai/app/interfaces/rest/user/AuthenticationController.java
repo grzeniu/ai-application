@@ -8,10 +8,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.wat.ai.app.config.jwt.JwtTokenUtil;
+import pl.edu.wat.ai.app.interfaces.rest.jwt.JwtTokenUtil;
 import pl.edu.wat.ai.app.interfaces.rest.user.dto.*;
-import pl.edu.wat.ai.app.user.User;
-import pl.edu.wat.ai.app.user.UserRepository;
+import pl.edu.wat.ai.app.finances.user.User;
+import pl.edu.wat.ai.app.finances.user.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;

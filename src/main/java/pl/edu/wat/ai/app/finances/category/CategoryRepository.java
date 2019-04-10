@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.user.finances.category;
+package pl.edu.wat.ai.app.finances.category;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

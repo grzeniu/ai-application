@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.config.jwt;
+package pl.edu.wat.ai.app.interfaces.rest.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -6,7 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import pl.edu.wat.ai.app.user.User;
+import pl.edu.wat.ai.app.finances.user.User;
 
 import java.io.Serializable;
 import java.util.Arrays;

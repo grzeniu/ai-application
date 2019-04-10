@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.user.finances;
+package pl.edu.wat.ai.app.finances;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,5 +12,5 @@ import javax.persistence.Entity;
 @Data
 @Audited
 @DiscriminatorValue("EXPENSES")
-public class Expense extends Finance {
+class Expense extends Finance {
 }

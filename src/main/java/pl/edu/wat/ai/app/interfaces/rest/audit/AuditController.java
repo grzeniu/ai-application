@@ -1,11 +1,11 @@
-package pl.edu.wat.ai.app.interfaces.rest;
+package pl.edu.wat.ai.app.interfaces.rest.audit;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.wat.ai.app.user.finances.FinanceService;
+import pl.edu.wat.ai.app.finances.FinanceService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

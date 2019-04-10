@@ -7,9 +7,8 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import pl.edu.wat.ai.app.interfaces.rest.audit.AuditorAwareImpl;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.util.Optional;
 
 @SpringBootApplication
 @EnableScheduling
