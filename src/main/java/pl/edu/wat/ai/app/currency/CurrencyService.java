@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CurrencyProcessing {
+public class CurrencyService {
 
     private final CurrencyRepository currencyRepository;
 

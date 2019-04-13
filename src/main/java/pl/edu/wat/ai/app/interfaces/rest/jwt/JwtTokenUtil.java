@@ -6,7 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import pl.edu.wat.ai.app.finances.user.User;
+import pl.edu.wat.ai.app.user.User;
 
 import java.io.Serializable;
 import java.util.Arrays;

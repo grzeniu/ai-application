@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.wat.ai.app.finances.user.User;
-import pl.edu.wat.ai.app.finances.user.UserService;
+import pl.edu.wat.ai.app.user.User;
+import pl.edu.wat.ai.app.user.UserService;
 
 import java.util.List;
 

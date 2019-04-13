@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
-import pl.edu.wat.ai.app.currency.CurrencyProcessing;
+import pl.edu.wat.ai.app.currency.CurrencyService;
 
 import java.util.Arrays;
 
@@ -38,7 +38,7 @@ class ReceiverConfig {
     }
 
     @Bean
-    public JmsConsumer receiver(CurrencyProcessing currencyProcessing) {
-        return new JmsConsumer(currencyProcessing);
+    public JmsConsumer receiver(CurrencyService currencyService) {
+        return new JmsConsumer(currencyService);
     }
 }

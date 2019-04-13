@@ -1,7 +1,6 @@
 package pl.edu.wat.ai.app.interfaces.rest.user.dto
 
-
-import pl.edu.wat.ai.app.finances.user.User
+import pl.edu.wat.ai.app.user.User
 import spock.lang.Specification
 import spock.lang.Subject
 

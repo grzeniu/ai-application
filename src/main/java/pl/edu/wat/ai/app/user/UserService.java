@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.finances.user;
+package pl.edu.wat.ai.app.user;
 
 
 import lombok.RequiredArgsConstructor;
@@ -28,10 +28,6 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
     }
 
-    private List<SimpleGrantedAuthority> getAuthority() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
-    }
-
     public List<User> findAll() {
         List<User> list = new ArrayList<>();
         userRepository.findAll().iterator().forEachRemaining(list::add);
@@ -47,10 +43,18 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(usernameFromToken).orElseThrow(EntityNotFoundException::new);
     }
 
+    public User updateUserFinancies(User user){
+        return userRepository.save(user);
+    }
+
     @Transactional
     public User updateUserLimit(String token, String newLimit) {
         User user = findByToken(token);
         user.updateLimit(newLimit);
         return user;
+    }
+
+    private List<SimpleGrantedAuthority> getAuthority() {
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 }

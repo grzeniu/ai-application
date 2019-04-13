@@ -35,20 +35,6 @@ public class FinancesController {
         return new ResponseEntity<>(financeService.getExpensesByUser(token), HttpStatus.OK);
     }
 
-    @PostMapping("/expenses")
-    private ResponseEntity<String> addExpense(@RequestHeader("Authorization") String token,
-                                              @RequestBody List<FinanceDto> financeDto) {
-        financeService.addExpenses(token, financeDto);
-        return new ResponseEntity<>("Done", HttpStatus.CREATED);
-    }
-
-    @PostMapping("/incomes")
-    private ResponseEntity<String> addIncome(@RequestHeader("Authorization") String token,
-                                             @RequestBody List<FinanceDto> financeDto) {
-        financeService.addIncomes(token, financeDto);
-        return new ResponseEntity<>("Done", HttpStatus.CREATED);
-    }
-
     @PostMapping("/expense")
     private ResponseEntity<Finance> addExpense(@RequestHeader("Authorization") String token,
                                                @RequestBody FinanceDto financeDto) {

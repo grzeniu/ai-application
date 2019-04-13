@@ -3,10 +3,9 @@ package pl.edu.wat.ai.app.finances;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.edu.wat.ai.app.finances.user.User;
-import pl.edu.wat.ai.app.finances.user.UserRepository;
-import pl.edu.wat.ai.app.interfaces.rest.jwt.JwtTokenUtil;
 import pl.edu.wat.ai.app.interfaces.rest.user.finances.FinanceDto;
+import pl.edu.wat.ai.app.user.User;
+import pl.edu.wat.ai.app.user.UserService;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -16,80 +15,69 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FinanceService {
 
-    private final UserRepository userRepository;
+    private static final String INCOME = "INCOME";
+    private static final String EXPENSES = "EXPENSES";
+
     private final ExpenseRepository expenseRepository;
     private final IncomeRepository incomeRepository;
     private final FinanceFactory financeFactory;
-    private final JwtTokenUtil jwtTokenUtil;
+    private final UserService userService;
 
     public List<Finance> getIncomesByUser(String token) {
-        return getFinanceByUser(token).stream().filter(it -> it.getFinanceType().equals("INCOME")).collect(Collectors.toList());
+        return getFinanceByUser(token).stream()
+                .filter(it -> it.getFinanceType().equals(INCOME))
+                .collect(Collectors.toList());
     }
 
     public List<Finance> getExpensesByUser(String token) {
-        return getFinanceByUser(token).stream().filter(it -> it.getFinanceType().equals("EXPENSES")).collect(Collectors.toList());
+        return getFinanceByUser(token).stream()
+                .filter(it -> it.getFinanceType().equals(EXPENSES))
+                .collect(Collectors.toList());
     }
 
-    public List<Finance> getFinanceByUser(String token) {
-        return findUserByToken(token).getFinances();
+    private List<Finance> getFinanceByUser(String token) {
+        return userService.findByToken(token).getFinances();
     }
 
     public List<Finance> getFinanceByUserByDate(String token, Integer month, Integer year) {
-        return findUserByToken(token)
+        return userService.findByToken(token)
                 .getFinances()
                 .stream()
                 .filter(it -> it.getCreatedDate().getMonthValue() == month && it.getCreatedDate().getYear() == year)
                 .collect(Collectors.toList());
     }
 
-    public User addExpenses(String token, List<FinanceDto> finances) {
-        User user = findUserByToken(token);
-        List<Expense> expenses = finances.stream().map(this::createExpanse).collect(Collectors.toList());
-
-        user.getFinances().addAll(expenses);
-        return userRepository.save(user);
-    }
-
-    public User addIncomes(String token, List<FinanceDto> finances) {
-        User user = findUserByToken(token);
-        List<Income> incomes = finances.stream().map(this::createIncome).collect(Collectors.toList());
-
-        user.getFinances().addAll(incomes);
-        return userRepository.save(user);
-    }
-
     @Transactional
     public Expense addExpense(String token, FinanceDto finance) {
-        User user = findUserByToken(token);
+        User user = userService.findByToken(token);
         Expense expense = createExpanse(finance);
 
         Expense savedExpense = expenseRepository.save(expense);
         user.getFinances().add(expense);
-        userRepository.save(user);
+        userService.updateUserFinancies(user);
         return expenseRepository.findById(savedExpense.getId()).orElseThrow(EntityNotFoundException::new);
     }
 
     @Transactional
     public Income addIncome(String token, FinanceDto finance) {
-        User user = findUserByToken(token);
+        User user = userService.findByToken(token);
         Income income = createIncome(finance);
 
         Income savedIncome = incomeRepository.save(income);
         user.getFinances().add(income);
-        userRepository.save(user);
+        userService.updateUserFinancies(user);
         return incomeRepository.findById(savedIncome.getId()).orElseThrow(EntityNotFoundException::new);
     }
 
+    //TODO user is needed ?
     public void deleteFinance(String token, Integer id) {
-        User user = findUserByToken(token);
-        List<Finance> financeToRemove = user.getFinances().stream().filter(it -> id.equals(it.getId())).collect(Collectors.toList());
-        user.getFinances().removeAll(financeToRemove);
-        userRepository.save(user);
-    }
+        User user = userService.findByToken(token);
+        List<Finance> financeToRemove = user.getFinances().stream()
+                .filter(it -> id.equals(it.getId()))
+                .collect(Collectors.toList());
 
-    private User findUserByToken(String token) {
-        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(token.substring(7));
-        return userRepository.findByUsername(usernameFromToken).orElseThrow(EntityNotFoundException::new);
+        user.getFinances().removeAll(financeToRemove);
+        userService.updateUserFinancies(user);
     }
 
     private Expense createExpanse(FinanceDto finance) {

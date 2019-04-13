@@ -5,19 +5,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 import pl.edu.wat.ai.app.currency.Currency;
-import pl.edu.wat.ai.app.currency.CurrencyProcessing;
+import pl.edu.wat.ai.app.currency.CurrencyService;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class JmsConsumer {
 
-    private final CurrencyProcessing currencyProcessing;
+    private final CurrencyService currencyService;
 
     @JmsListener(destination = "MY_QUEUE")
     public void receive(JmsMessage message) {
         log.info("Received message " + message);
-        Currency updatedCurrency = RestClient.fetchRate(currencyProcessing.getCurrencyById(message.getId()));
-        currencyProcessing.updateCurrencyRate(updatedCurrency);
+        Currency updatedCurrency = RestClient.fetchRate(currencyService.getCurrencyById(message.getId()));
+        currencyService.updateCurrencyRate(updatedCurrency);
     }
 }
