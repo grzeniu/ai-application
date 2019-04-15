@@ -3,13 +3,13 @@ package pl.edu.wat.ai.app.finances;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.edu.wat.ai.app.interfaces.rest.user.finances.FinanceDto;
 import pl.edu.wat.ai.app.user.User;
 import pl.edu.wat.ai.app.user.UserService;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
+import pl.edu.wat.ai.app.interfaces.rest.finances.FinanceDto;
 
 @Service
 @RequiredArgsConstructor
@@ -69,7 +69,6 @@ public class FinanceService {
         return incomeRepository.findById(savedIncome.getId()).orElseThrow(EntityNotFoundException::new);
     }
 
-    //TODO user is needed ?
     public void deleteFinance(String token, Integer id) {
         User user = userService.findByToken(token);
         List<Finance> financeToRemove = user.getFinances().stream()

@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.interfaces.jms;
+package pl.edu.wat.ai.app.integration.echangerate;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.interfaces.jms;
+package pl.edu.wat.ai.app.integration.echangerate;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
