@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.finances;
+package pl.edu.wat.ai.app.user.finances;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import org.hibernate.envers.NotAudited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import pl.edu.wat.ai.app.finances.category.Category;
+import pl.edu.wat.ai.app.user.finances.category.Category;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;

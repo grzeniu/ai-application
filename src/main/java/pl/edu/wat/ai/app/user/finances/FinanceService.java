@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.finances;
+package pl.edu.wat.ai.app.user.finances;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

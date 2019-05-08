@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.finances.category;
+package pl.edu.wat.ai.app.user.finances.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

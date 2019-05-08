@@ -13,7 +13,6 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-//TODO Refactor use spring cloud
 @Slf4j
 class RestClient {
     private static final String REST_SERVICE_URI = "https://api.exchangeratesapi.io/latest?symbols=%s,%s";

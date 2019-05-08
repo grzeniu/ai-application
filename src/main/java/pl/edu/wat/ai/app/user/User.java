@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
-import pl.edu.wat.ai.app.finances.Finance;
+import pl.edu.wat.ai.app.user.finances.Finance;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.wat.ai.app.finances.category.Category;
-import pl.edu.wat.ai.app.finances.category.CategoryRepository;
+import pl.edu.wat.ai.app.user.finances.category.Category;
+import pl.edu.wat.ai.app.user.finances.category.CategoryService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,16 +19,16 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class CategoryController {
 
-    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
 
     @GetMapping("/pl")
     private ResponseEntity<List<CategoryDto>> getCategoriesWithPolishNames() {
-        return new ResponseEntity<>(categoryRepository.findAll().stream().map(this::mapToDtoUsingPolishNames).collect(Collectors.toList()), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.findAll().stream().map(this::mapToDtoUsingPolishNames).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("/eng")
     private ResponseEntity<List<CategoryDto>> getCategoriesWithEnglishNames() {
-        return new ResponseEntity<>(categoryRepository.findAll().stream().map(this::mapToDtoUsingEnglishNames).collect(Collectors.toList()), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.findAll().stream().map(this::mapToDtoUsingEnglishNames).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     private CategoryDto mapToDtoUsingPolishNames(Category category) {

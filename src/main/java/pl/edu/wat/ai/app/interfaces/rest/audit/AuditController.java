@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.wat.ai.app.finances.FinanceService;
+import pl.edu.wat.ai.app.user.finances.FinanceService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

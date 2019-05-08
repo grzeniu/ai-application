@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.wat.ai.app.finances.Finance;
-import pl.edu.wat.ai.app.finances.FinanceService;
+import pl.edu.wat.ai.app.user.finances.Finance;
+import pl.edu.wat.ai.app.user.finances.FinanceService;
 
 import java.util.List;
 

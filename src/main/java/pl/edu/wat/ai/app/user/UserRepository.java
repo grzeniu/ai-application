@@ -1,9 +1,14 @@
 package pl.edu.wat.ai.app.user;
 
-import org.springframework.data.repository.CrudRepository;
-
+import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface UserRepository {
     Optional<User> findByUsername(String username);
+
+    List<User> findAll();
+
+    Optional<User> findById(Integer id);
+
+    User save(User user);
 }
