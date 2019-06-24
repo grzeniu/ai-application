@@ -1,14 +1,18 @@
 package pl.edu.wat.ai.app.interfaces.rest.currency;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-@Builder
-class CurrencyDto {
-    private final Integer id;
-    private final String from;
-    private final String to;
-    private final Double rate;
+@Setter
+public class CurrencyDto {
+
+    private Integer id;
+    private String from;
+    private String to;
+    private Double rate;
+
+    public CurrencyDto() {
+    }
 }
 
