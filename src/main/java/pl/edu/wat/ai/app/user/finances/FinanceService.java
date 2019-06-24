@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.edu.wat.ai.app.interfaces.rest.user.finances.FinanceDto;
 import pl.edu.wat.ai.app.user.User;
 import pl.edu.wat.ai.app.user.UserService;
+import pl.edu.wat.ai.app.util.Assert;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -23,24 +24,27 @@ public class FinanceService {
     private final FinanceFactory financeFactory;
     private final UserService userService;
 
-    public List<Finance> getIncomesByUser(String token) {
-        return getFinanceByUser(token).stream()
+    public List<Finance> getIncomesByUser(String username) {
+        return getFinanceByUser(username).stream()
                 .filter(it -> it.getFinanceType().equals(INCOME))
                 .collect(Collectors.toList());
     }
 
-    public List<Finance> getExpensesByUser(String token) {
-        return getFinanceByUser(token).stream()
+    public List<Finance> getExpensesByUser(String username) {
+        return getFinanceByUser(username).stream()
                 .filter(it -> it.getFinanceType().equals(EXPENSES))
                 .collect(Collectors.toList());
     }
 
-    private List<Finance> getFinanceByUser(String token) {
-        return userService.findByToken(token).getFinances();
+    public List<Finance> getFinanceByUser(String username) {
+        return userService.findByUsername(username).getFinances();
     }
 
-    public List<Finance> getFinanceByUserByDate(String token, Integer month, Integer year) {
-        return userService.findByToken(token)
+    public List<Finance> getFinanceByUserByDate(String username, Integer month, Integer year) {
+        Assert.notNull(month, "month cannot be null");
+        Assert.notNull(year, "year cannot be null");
+
+        return userService.findByUsername(username)
                 .getFinances()
                 .stream()
                 .filter(it -> it.getCreatedDate().getMonthValue() == month && it.getCreatedDate().getYear() == year)
@@ -48,8 +52,10 @@ public class FinanceService {
     }
 
     @Transactional
-    public Expense addExpense(String token, FinanceDto finance) {
-        User user = userService.findByToken(token);
+    public Expense addExpense(String username, FinanceDto finance) {
+        Assert.notNull(finance, "Finance cannot be null");
+
+        User user = userService.findByUsername(username);
         Expense expense = createExpanse(finance);
 
         Expense savedExpense = expenseRepository.save(expense);
@@ -59,8 +65,10 @@ public class FinanceService {
     }
 
     @Transactional
-    public Income addIncome(String token, FinanceDto finance) {
-        User user = userService.findByToken(token);
+    public Income addIncome(String username, FinanceDto finance) {
+        Assert.notNull(finance, "Finance cannot be null");
+
+        User user = userService.findByUsername(username);
         Income income = createIncome(finance);
 
         Income savedIncome = incomeRepository.save(income);
@@ -69,9 +77,10 @@ public class FinanceService {
         return incomeRepository.findById(savedIncome.getId()).orElseThrow(EntityNotFoundException::new);
     }
 
-    //TODO user is needed ?
-    public void deleteFinance(String token, Integer id) {
-        User user = userService.findByToken(token);
+    public void deleteFinance(String username, Integer id) {
+        Assert.notNull(id, "Finance id cannot be null");
+
+        User user = userService.findByUsername(username);
         List<Finance> financeToRemove = user.getFinances().stream()
                 .filter(it -> id.equals(it.getId()))
                 .collect(Collectors.toList());

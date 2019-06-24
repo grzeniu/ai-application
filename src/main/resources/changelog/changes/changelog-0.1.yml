@@ -1,10 +1,51 @@
 databaseChangeLog:
-- changeSet:
-    id: insert currency
-    author: Grzesiek
-    changes:
-    - sqlFile:
-        tableName: curency
-        schemaName: dbo
-        path: v0001.sql
-        relativeToChangelogFile: true
+  - changeSet:
+      id: create_table_currency
+      author: Pawel
+      changes:
+        - createTable:
+            tableName: currency
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: from_currency
+                  type: varchar(4)
+              - column:
+                  name: to_currency
+                  type: varchar(4)
+              - column:
+                  name: rate
+                  type: double precision[6][3]
+  - changeSet:
+      id: create_table_catogory
+      author: Pawel
+      changes:
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: polish_name
+                  type: varchar(255)
+              - column:
+                  name: english_name
+                  type: varchar(255)
+  - changeSet:
+      id: insert_currency
+      author: Grzesiek
+      changes:
+        - sqlFile:
+            tableName: curency
+            schemaName: dbo
+            path: v0001.sql
+            relativeToChangelogFile: true

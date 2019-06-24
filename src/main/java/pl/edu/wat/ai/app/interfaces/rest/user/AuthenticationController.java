@@ -5,23 +5,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.wat.ai.app.user.User;
-import pl.edu.wat.ai.app.user.UserRepository;
 import pl.edu.wat.ai.app.interfaces.rest.jwt.JwtTokenUtil;
 import pl.edu.wat.ai.app.interfaces.rest.user.dto.AuthToken;
 import pl.edu.wat.ai.app.interfaces.rest.user.dto.LoginUserDto;
 import pl.edu.wat.ai.app.interfaces.rest.user.dto.NewUserDto;
 import pl.edu.wat.ai.app.interfaces.rest.user.dto.UserDto;
 import pl.edu.wat.ai.app.interfaces.rest.user.dto.UserDtoMapper;
+import pl.edu.wat.ai.app.user.User;
+import pl.edu.wat.ai.app.user.UserService;
 
-import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -33,13 +31,13 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final BCryptPasswordEncoder bcryptEncoder;
     private final JwtTokenUtil jwtTokenUtil;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @PostMapping("/generate-token")
-    public ResponseEntity<AuthToken> register(@Valid @RequestBody LoginUserDto loginUser) throws AuthenticationException {
+    public ResponseEntity<AuthToken> register(@Valid @RequestBody LoginUserDto loginUser) {
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
-        final User user = userRepository.findByUsername(loginUser.getUsername()).orElseThrow(EntityNotFoundException::new);
+        final User user = userService.findByUsername(loginUser.getUsername());
         final String token = jwtTokenUtil.generateToken(user);
         return new ResponseEntity<>(new AuthToken(token, user.getUsername()), HttpStatus.CREATED);
     }
@@ -50,7 +48,7 @@ public class AuthenticationController {
     }
 
     private UserDto saveNewUser(NewUserDto dto) {
-        return UserDtoMapper.mapUserToDto(userRepository.save(User.builder()
+        return UserDtoMapper.mapUserToDto(userService.save(User.builder()
                 .username(dto.getUsername())
                 .firstName(dto.getFirstname())
                 .lastName(dto.getLastname())

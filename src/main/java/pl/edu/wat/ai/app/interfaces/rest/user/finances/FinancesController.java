@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.wat.ai.app.interfaces.rest.user.finances.category.CategoryDto;
 import pl.edu.wat.ai.app.user.finances.Finance;
 import pl.edu.wat.ai.app.user.finances.FinanceService;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,34 +27,52 @@ public class FinancesController {
 
     private final FinanceService financeService;
 
+    @GetMapping()
+    private ResponseEntity<List<FinanceResponseDto>> getAllFinances(Principal principal) {
+        return new ResponseEntity<>(financeService.getFinanceByUser(principal.getName()).stream()
+                .map(this::mapToFinanceResponseDto).collect(Collectors.toList()), HttpStatus.OK);
+    }
+
     @GetMapping("/incomes")
-    private ResponseEntity<List<Finance>> getAllIncomes(@RequestHeader("Authorization") String token) {
-        return new ResponseEntity<>(financeService.getIncomesByUser(token), HttpStatus.OK);
+    private ResponseEntity<List<FinanceResponseDto>> getAllIncomes(Principal principal) {
+        return new ResponseEntity<>(financeService.getIncomesByUser(principal.getName()).stream()
+                .map(this::mapToFinanceResponseDto).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("/expenses")
-    private ResponseEntity<List<Finance>> getAllExpenses(@RequestHeader("Authorization") String token) {
-        return new ResponseEntity<>(financeService.getExpensesByUser(token), HttpStatus.OK);
+    private ResponseEntity<List<FinanceResponseDto>> getAllExpenses(Principal principal) {
+        return new ResponseEntity<>(financeService.getExpensesByUser(principal.getName()).stream()
+                .map(this::mapToFinanceResponseDto).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @PostMapping("/expense")
-    private ResponseEntity<Finance> addExpense(@RequestHeader("Authorization") String token,
-                                               @RequestBody FinanceDto financeDto) {
-        return new ResponseEntity<>(financeService.addExpense(token, financeDto), HttpStatus.CREATED);
+    private ResponseEntity<FinanceResponseDto> addExpense(Principal principal, @RequestBody FinanceDto financeDto) {
+        return new ResponseEntity<>(mapToFinanceResponseDto(financeService.addExpense(principal.getName(), financeDto)), HttpStatus.CREATED);
     }
 
     @PostMapping("/income")
-    private ResponseEntity<Finance> addIncome(@RequestHeader("Authorization") String token,
-                                              @RequestBody FinanceDto financeDto) {
-        return new ResponseEntity<>(financeService.addIncome(token, financeDto), HttpStatus.CREATED);
+    private ResponseEntity<FinanceResponseDto> addIncome(Principal principal, @RequestBody FinanceDto financeDto) {
+        return new ResponseEntity<>(mapToFinanceResponseDto(financeService.addIncome(principal.getName(), financeDto)), HttpStatus.CREATED);
     }
 
     @DeleteMapping("{id}")
-    private ResponseEntity deleteFinance(@RequestHeader("Authorization") String token,
-                                         @PathVariable Integer id) {
-        financeService.deleteFinance(token, id);
+    private ResponseEntity deleteFinance(Principal principal, @PathVariable Integer id) {
+        financeService.deleteFinance(principal.getName(), id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-
+    private FinanceResponseDto mapToFinanceResponseDto(Finance finance) {
+        return FinanceResponseDto.builder()
+                .id(finance.getId())
+                .description(finance.getDescription())
+                .value(finance.getValue())
+                .financeType(finance.getFinanceType())
+                .createdBy(finance.getCreatedBy())
+                .createdDate(finance.getCreatedDate())
+                .category(CategoryDto.builder()
+                        .id(finance.getCategory().getId())
+                        .name(finance.getCategory().getEnglishName())
+                        .build())
+                .build();
+    }
 }

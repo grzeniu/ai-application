@@ -1,9 +1,11 @@
 package pl.edu.wat.ai.app.user.finances.category;
 
+import org.springframework.data.repository.Repository;
+
 import java.util.List;
 import java.util.Optional;
 
-public interface CategoryRepository {
+public interface CategoryRepository extends Repository<Category, Integer> {
 
     List<Category> findAll();
 

@@ -1,6 +1,5 @@
 package pl.edu.wat.ai.app.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,7 +31,6 @@ public class User {
     private String firstName;
     private String lastName;
     private String username;
-    @JsonIgnore
     private String password;
     private String mail;
     private String userMonthlyLimit;
