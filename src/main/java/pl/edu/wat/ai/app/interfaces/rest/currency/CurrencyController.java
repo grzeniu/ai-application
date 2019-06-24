@@ -1,6 +1,8 @@
 package pl.edu.wat.ai.app.interfaces.rest.currency;
 
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.wat.ai.app.currency.Currency;
 import pl.edu.wat.ai.app.currency.CurrencyService;
+import pl.edu.wat.ai.app.mapper.CurrencyMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,23 +28,14 @@ public class CurrencyController {
     @GetMapping("/convert")
     public ResponseEntity<CurrencyDto> getOne(@RequestParam() String from, @RequestParam() String to) {
         Currency currency = currencyService.getSpecifiedCurrencies(from, to);
-        return new ResponseEntity<>(mapToDto(currency), HttpStatus.OK);
+        return new ResponseEntity<>(CurrencyMapper.INSTANCE.currencyToDto(currency), HttpStatus.OK);
     }
 
     @GetMapping()
     public ResponseEntity<List<CurrencyDto>> getCurrencyRates() {
         return new ResponseEntity<>(
-                currencyService.getCurrencies().stream().map(this::mapToDto).collect(Collectors.toList()),
+                currencyService.getCurrencies().stream().map(CurrencyMapper.INSTANCE::currencyToDto).collect(Collectors.toList()),
                 HttpStatus.OK
         );
-    }
-
-    private CurrencyDto mapToDto(Currency currency) {
-        return CurrencyDto.builder()
-                .id(currency.getId())
-                .rate(currency.getRate())
-                .from(currency.getFromCurrency())
-                .to(currency.getToCurrency())
-                .build();
     }
 }
