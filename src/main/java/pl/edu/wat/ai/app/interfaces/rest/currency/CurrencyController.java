@@ -1,8 +1,6 @@
 package pl.edu.wat.ai.app.interfaces.rest.currency;
 
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.wat.ai.app.currency.Currency;
 import pl.edu.wat.ai.app.currency.CurrencyService;
-import pl.edu.wat.ai.app.mapper.CurrencyMapper;
+import pl.edu.wat.ai.app.mappers.CurrencyMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,9 +1,6 @@
 package pl.edu.wat.ai.app.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.envers.Audited;
 import pl.edu.wat.ai.app.user.finances.Finance;
 
@@ -17,6 +14,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Getter
+@Setter
 @Entity
 @Builder
 @Audited

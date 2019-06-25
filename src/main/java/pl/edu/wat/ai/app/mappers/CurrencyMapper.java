@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.mapper;
+package pl.edu.wat.ai.app.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

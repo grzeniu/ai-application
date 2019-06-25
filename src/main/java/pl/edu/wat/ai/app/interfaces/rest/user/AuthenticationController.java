@@ -16,7 +16,7 @@ import pl.edu.wat.ai.app.interfaces.rest.user.dto.AuthToken;
 import pl.edu.wat.ai.app.interfaces.rest.user.dto.LoginUserDto;
 import pl.edu.wat.ai.app.interfaces.rest.user.dto.NewUserDto;
 import pl.edu.wat.ai.app.interfaces.rest.user.dto.UserDto;
-import pl.edu.wat.ai.app.interfaces.rest.user.dto.UserDtoMapper;
+import pl.edu.wat.ai.app.mappers.UserMapper;
 import pl.edu.wat.ai.app.user.User;
 import pl.edu.wat.ai.app.user.UserService;
 
@@ -44,19 +44,8 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public ResponseEntity<UserDto> saveUser(@Valid @RequestBody NewUserDto user) {
-        return new ResponseEntity<>(saveNewUser(user), HttpStatus.CREATED);
+        User newUser = userService.save(UserMapper.INSTANCE.newUserToUser(user, bcryptEncoder));
+        return new ResponseEntity<>(UserMapper.INSTANCE.userToDto(newUser), HttpStatus.CREATED);
     }
-
-    private UserDto saveNewUser(NewUserDto dto) {
-        return UserDtoMapper.mapUserToDto(userService.save(User.builder()
-                .username(dto.getUsername())
-                .firstName(dto.getFirstname())
-                .lastName(dto.getLastname())
-                .password(bcryptEncoder.encode(dto.getPassword()))
-                .mail(dto.getMail())
-                .userMonthlyLimit("")
-                .build()));
-    }
-
 
 }

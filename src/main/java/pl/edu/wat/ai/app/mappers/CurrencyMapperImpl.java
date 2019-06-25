@@ -1,4 +1,4 @@
-package pl.edu.wat.ai.app.mapper;
+package pl.edu.wat.ai.app.mappers;
 
 import pl.edu.wat.ai.app.currency.Currency;
 import pl.edu.wat.ai.app.interfaces.rest.currency.CurrencyDto;

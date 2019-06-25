@@ -1,15 +1,14 @@
 package pl.edu.wat.ai.app.interfaces.rest.user.dto;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
-@Builder
+@Data
 public class UserDto {
-    private final int id;
-    private final String firstName;
-    private final String lastName;
-    private final String username;
-    private final String mail;
-    private final String limit;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String username;
+    private String mail;
+    private String limit;
+
 }
